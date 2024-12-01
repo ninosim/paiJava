@@ -1,23 +1,34 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 import model.*;
-import service.UsuarioService;
-import enums.CURSOS;
+import service.*;
+import enums.*;
 import java.util.ArrayList;
-
+import java.util.Date;
+import java.util.Calendar;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scNum = new Scanner(System.in);
         Scanner scText = new Scanner(System.in);
-        Pessoa admin = new Coordenadora("Admin", "83989991234", "admin", "1234", 2024999001);
-        UsuarioService.cadastrarUsuario((Usuario) admin);
-        Socorrista socorrista = new Socorrista("Vitória", "839898989898", "vitoria85", "1234", 202455001, CURSOS.Farmácia, 4);
-        UsuarioService.cadastrarUsuario((Usuario) socorrista);
+        Calendar calendar = Calendar.getInstance();
         String login;
         String senha;
         String nivelUsuarioAtivo;
         boolean loginValido = false;
         int menu;
+
+// INSTÂNCIAS previamente cadastradas para popular o banco de dados:
+        Pessoa admin = new Coordenadora("Admin", "83989991234", "admin", "1234", 2024999001);
+        UsuarioService.cadastrarUsuario((Usuario) admin);
+        Socorrista socorrista = new Socorrista("Vitória", "839898989898", "vitoria85", "1234", 202455001, CURSOS.Farmácia, 4);
+        UsuarioService.cadastrarUsuario((Usuario) socorrista);
+        Paciente paciente = new Paciente("Arthur", "arthur@bol.com.br", 202400001, 21,"Sistemas para Internet", 2, "Masculino");
+        PacienteService.cadastrarPaciente((Paciente) paciente);
+        Date d1 = new Date();
+        Atendimento atendimento = new Atendimento(2024000000, paciente, d1, "Coceira e enjôo", false, true, 37, true, true, false, false, "n/a", false, "n/a", ESTADOINICIAL.Leve_e_Instavel);
+        AtendimentoService.cadastrarAtendimento((Atendimento) atendimento);
+
 
         System.out.println("Pronto Atendimento Institucional UNIESP");
         while (!loginValido) {
@@ -199,18 +210,26 @@ public class Main {
                 menu = scNum.nextInt();
                 switch (menu) {
                     case 1:
-                        Socorrista socorristaNova = new Socorrista();
-                        System.out.println("Informe o NOME da Socorrista: ");
-                        socorristaNova.setNome(scText.nextLine());
-                        System.out.println("Informe o CONTATO da Socorrista: ");
-                        socorristaNova.setContato(scText.nextLine());
-                        System.out.println("Informe o LOGIN da Socorrista: ");
-                        socorristaNova.setLogin(scText.nextLine());
-                        System.out.println("Informe a SENHA da Socorrista: ");
-                        socorristaNova.setSenha(scText.nextLine());
-                        System.out.println("Informe o CÓDIGO da Socorrista: ");
-                        socorristaNova.setIdUsuario(scNum.nextInt());
+                        Paciente pacienteNovo = new Paciente();
+                        System.out.println("Informe o NOME do Paciente: ");
+                        pacienteNovo.setNome(scText.nextLine());
+                        System.out.println("Informe o CONTATO do Paciente: ");
+                        pacienteNovo.setContato(scText.nextLine());
+                        System.out.println("Informe o CÓDIGO do Paciente: ");
+                        pacienteNovo.setIdPaciente(scNum.nextInt());
+                        System.out.println("Informe a IDADE do Paciente: ");
+                        pacienteNovo.setIdade(scNum.nextInt());
+                        System.out.println("Informe o CURSO do Paciente: ");
+                        pacienteNovo.setCurso(scText.nextLine());
+                        System.out.println("Informe o PERÍODO do Paciente: ");
+                        pacienteNovo.setPeriodo(scNum.nextInt());
+                        System.out.println("Informe o SEXO do Paciente: ");
+                        pacienteNovo.setSexo(scText.nextLine());
+                        PacienteService.cadastrarPaciente((Paciente) pacienteNovo);
 
+                        Atendimento atendimentoNovo = new Atendimento();
+                        atendimentoNovo.setIdAtendimento(PacienteService.getUltimoId() + 1);
+// (int idAtendimento, Paciente paciente, Date dataAtendimento, String motivoAtendimento, boolean dificuldadeRespiratoria, boolean febre, double febreTemperatura, boolean nauseas, boolean alergia, boolean vomitos, boolean dor, String dorLocal, boolean outraQueixa, String outraQueixaTexto, ESTADOINICIAL estadoinicial) {
                     case 2:
                         //MÉTODO de Consultar Pacientes
                     case 3:
