@@ -3,6 +3,8 @@ package model;
 import enums.*;
 import service.UsuarioService;
 
+import java.util.Objects;
+
 public abstract class Usuario extends Pessoa implements UsuarioService {
     protected NIVELUSUARIO nivelUsuario;
     protected String login;
@@ -13,7 +15,7 @@ public abstract class Usuario extends Pessoa implements UsuarioService {
 
 
     //CONSTRUTORES
-    public Usuario(NIVELUSUARIO nivelUsuario, String nome, String contato, String login, String senha, int idUsuario) {
+    public Usuario(String nome, String contato, NIVELUSUARIO nivelUsuario, String login, String senha, int idUsuario) {
         super(nome, contato);
         this.nivelUsuario = nivelUsuario;
         this.login = login;
@@ -22,9 +24,6 @@ public abstract class Usuario extends Pessoa implements UsuarioService {
     }
 
     public Usuario() {
-    }
-
-    public Usuario(String nome, String contato, String login, String senha, int idUsuario) {
     }
 
     //GETTERS & SETTERS
@@ -85,12 +84,12 @@ public abstract class Usuario extends Pessoa implements UsuarioService {
 //MÉTODO de Validar Login/Senha
     public static boolean validarUsuario(String login, String senha) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getLogin() == login) {
-                if (usuario.getSenha() == senha) {
+            if (Objects.equals(usuario.getLogin(), login)) {
+                if (Objects.equals(usuario.getSenha(), senha)) {
                     return true;
                 }
             }
-            }
+        }
         return false;
     }
 

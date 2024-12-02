@@ -2,13 +2,14 @@ package service;
 
 import model.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 // @POST, cria uma lista com todos os usuários.
 public interface UsuarioService {
     ArrayList<Usuario> usuarios = new ArrayList<>();
 
-    public static void cadastrarUsuario(Usuario usuario) {
+    static void cadastrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
         System.out.println("Usuário cadastrado com sucesso!");
     }
@@ -23,7 +24,7 @@ public interface UsuarioService {
         int i = 0;
         for (Usuario usuario : usuarios) {
                 if (codigo == usuarios.get(i).getIdUsuario()) {
-                    System.out.printf("\nCÓDIGO: %d - Nome: %s - Contato: %s - Login: %s - Curso: %s - Período: %d\n", usuario.getIdUsuario(), usuario.getNome(), usuario.getContato(), usuario.getLogin());
+                    System.out.printf("\nCÓDIGO: %d - Nome: %s - Contato: %s - Login: %s - Curso: %s - Período: %d\n", usuario.getIdUsuario(), usuario.getNome(), usuario.getContato(), usuario.getLogin(), usuario.getCurso(), usuario.getPeriodo());
                     return true;
                 } else {
                     i++;
@@ -53,7 +54,7 @@ public interface UsuarioService {
 //MÉTODO para puxar dados de um usuário pelo login:
     static Usuario consultarUsuario(String login) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getLogin() == login) {
+            if (Objects.equals(usuario.getLogin(), login)) {
                 return usuario;
             }
         }

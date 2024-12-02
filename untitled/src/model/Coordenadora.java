@@ -3,9 +3,9 @@ package model;
 import enums.NIVELUSUARIO;
 
 public final class Coordenadora extends Usuario {
-    public Coordenadora(String nome, String contato, String login, String senha, int idUsuario) {
-        super(nome, contato, login, senha, idUsuario);
-        this.nivelUsuario = NIVELUSUARIO.Coordenadora;
+
+    public Coordenadora(String nome, String contato, NIVELUSUARIO nivelUsuario, String login, String senha, int idUsuario) {
+        super(nome, contato, nivelUsuario, login, senha, idUsuario);
     }
 
     public Coordenadora() {

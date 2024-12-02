@@ -1,4 +1,5 @@
 package service;
+import model.Atendimento;
 import model.Paciente;
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public interface PacienteService {
 
 // GET do código do ÚLTIMO Paciente
     static int getUltimoId() {
-        return pacientes.get(-1).getIdPaciente();
+        return pacientes.get(pacientes.size() - 1).getIdPaciente();
     }
 
 // MÉTODO para Exibir Informações de UM Paciente
@@ -27,7 +28,7 @@ public interface PacienteService {
         for (Paciente paciente : pacientes) {
             if (codigoPaciente == pacientes.get(i).getIdPaciente()) {
                 Paciente pacienteAtivo = pacientes.get(i);
-                System.out.printf("\nCÓDIGO DO PACIENTE: %d - \n Nome do Paciente: %s - Contato: %s -  Idade: %d\n - Curso: %s - Período: %d - Sexo: %s", pacienteAtivo.getIdPaciente(), pacienteAtivo.getNome(), pacienteAtivo.getContato(), pacienteAtivo.getIdade(), pacienteAtivo.getCurso(), pacienteAtivo.getPeriodo(), pacienteAtivo.getSexo());
+                System.out.printf("\nCÓDIGO DO PACIENTE: %d - \n Nome do Paciente: %s - Contato: %s -  Idade: %d\n - Curso: %s - Período: %d - Sexo: %s \n", pacienteAtivo.getIdPaciente(), pacienteAtivo.getNome(), pacienteAtivo.getContato(), pacienteAtivo.getIdade(), pacienteAtivo.getCurso(), pacienteAtivo.getPeriodo(), pacienteAtivo.getSexo());
                 return true;
             } else {
                 i++;
@@ -37,4 +38,10 @@ public interface PacienteService {
         return false;
     }
 
+//MÉTODO para Exibir Todos os Pacientes
+    static void consultarPacientes() {
+        for (Paciente paciente : pacientes) {
+            System.out.println("Código: " + paciente.getIdPaciente() + " - Nome do Paciente: " + paciente.getNome());
+        }
+    }
 }

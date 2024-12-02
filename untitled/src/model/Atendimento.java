@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 public class Atendimento implements AtendimentoService {
     private int idAtendimento;
-    protected Paciente paciente;
+    private Paciente paciente;
     private int idPaciente;
     private Date dataAtendimento;
     private String motivoAtendimento;

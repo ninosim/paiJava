@@ -8,11 +8,10 @@ import service.UsuarioService;
 public final class Socorrista extends Usuario {
 
 // CONSTRUTORES
-    public Socorrista(String nome, String contato, String login, String senha, int idUsuario, CURSOS curso, int periodo) {
-        super(nome, contato, login, senha, idUsuario);
+    public Socorrista(String nome, String contato, NIVELUSUARIO nivelUsuario, String login, String senha, int idUsuario, CURSOS curso, int periodo) {
+        super(nome, contato, nivelUsuario, login, senha, idUsuario);
         this.curso = curso;
         this.periodo = periodo;
-        this.nivelUsuario = NIVELUSUARIO.Socorrista;
     }
 
     public Socorrista() {
